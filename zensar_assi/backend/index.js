@@ -2,7 +2,7 @@ import express from 'express';
 import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
-
+import dotenv from 'dotenv';
 import cors from 'cors';
 import UserAuth, {SECRET} from './auth/auth.js';
 import Concert from './db/concert.js';
@@ -11,7 +11,7 @@ import User from './db/user.js';
 const app = express();
 const port = 3000;
 
-
+dotenv.config();
 
 app.use(cors({
     origin: '*', 
@@ -21,7 +21,7 @@ app.use(cors({
 app.use(express.json());
 
 
-const mongoUrl = "mongodb+srv://aneeshkulkarni007:583683@cluster0.ajkhk.mongodb.net/concertbook"
+const mongoUrl = process.env.mongoUrl;
 
 // register api
 mongoose.connect(mongoUrl, {
